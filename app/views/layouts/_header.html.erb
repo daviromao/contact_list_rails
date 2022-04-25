@@ -13,19 +13,31 @@
 
   <!-- Conteudo exibido em telas maiores e que serao escondidos em telas menores -->
   <div class="collapse navbar-collapse" id="expanded-menu">
-    <ul class="nav navbar-nav">
 
-      <li class="active">
-        <a href="#">Nova Conta</a>
-      </li>
-
-    </ul>
+    <% if !user_signed_in? %>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <%= link_to 'Nova Conta', new_user_path %>
+        </li>
+      </ul>
+    <%end%>
 
     <ul class="nav navbar-nav navbar-right">
 
+      <% if !user_signed_in? %>
         <li>
-          <%= link_to 'Entrar', '#' %>
+          <%= link_to 'Entrar', entrar_path %>
         </li>
+      
+      <%else%>
+      
+      <li >
+        <%= link_to 'Minha Pagina', contacts_path, class: "p-2 text-dark"%>
+        <%= link_to 'Editar', edit_user_path(current_user), class: "p-2 text-dark" %>
+        <%= link_to 'Sair', sair_path, method: :delete, class: "p-2 text-dark" %>
+      </li>
+
+      <% end %>
 
     </ul>
 
